@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080608"
+    >
+
+    <title>cataa</title>
+
+
+    <style>
+
+        /* ==========================================
+           CONFIGURACIÓN GENERAL
+        ========================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+
+            margin: 0;
+            padding: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: #080608;
+
+            color: white;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+        }
+
+
+        body {
+
+            min-height: 100svh;
+
+            overflow: hidden;
+
+        }
+
+
+        /* ==========================================
+           PANTALLA PRINCIPAL
+        ========================================== */
+
+        .page {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100svh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* ==========================================
+           FONDO DE LAS FOTOS
+        ========================================== */
+
+        .photos {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: grid;
+
+            /*
+                Diseño:
+
+                ┌──────────┬───────────────┐
+                │ PERRO    │               │
+                │          │   GATITO 1    │
+                ├──────────┤               │
+                │ GATITO 2 │               │
+                │          │               │
+                └──────────┴───────────────┘
+            */
+
+            grid-template-columns:
+                0.85fr
+                1.55fr;
+
+            grid-template-rows:
+                1fr
+                1fr;
+
+            gap: 4px;
+
+            z-index: 0;
+
+        }
+
+
+        /* ==========================================
+           CADA FOTO
+        ========================================== */
+
+        .photo {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #111;
+
+        }
+
+
+        .photo img {
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            /*
+                Las imágenes quedan claras
+            */
+
+            filter:
+                brightness(.96)
+                saturate(1.08);
+
+            transition:
+                transform 6s ease;
+
+        }
+
+
+        /* ==========================================
+           FOTO DEL PERRITO
+        ========================================== */
+
+        .photo:nth-child(1) {
+
+            grid-column: 1;
+            grid-row: 1;
+
+        }
+
+
+        .photo:nth-child(1) img {
+
+            object-position:
+                center center;
+
+            transform:
+                scale(1.04);
+
+        }
+
+
+        /* ==========================================
+           PRIMER GATITO
+        ========================================== */
+
+        .photo:nth-child(2) {
+
+            /*
+                Ocupa toda la columna derecha
+            */
+
+            grid-column: 2;
+
+            grid-row:
+                1 / span 2;
+
+        }
+
+
+        .photo:nth-child(2) img {
+
+            /*
+                Hacemos que el gatito
+                se vea bastante grande
+            */
+
+            transform:
+                scale(1.12);
+
+            object-position:
+                center center;
+
+        }
+
+
+        /* ==========================================
+           SEGUNDO GATITO
+        ========================================== */
+
+        .photo:nth-child(3) {
+
+            grid-column: 1;
+
+            grid-row: 2;
+
+        }
+
+
+        .photo:nth-child(3) img {
+
+            transform:
+                scale(1.14);
+
+            object-position:
+                center center;
+
+        }
+
+
+        /* ==========================================
+           GUITARRISTA
+        ========================================== */
+
+        .photo:nth-child(4) {
+
+            /*
+                Lo colocamos como pequeño
+                elemento decorativo.
+            */
+
+            position: absolute;
+
+            width: 22vw;
+
+            height: 22vw;
+
+            max-width: 180px;
+
+            max-height: 180px;
+
+            right: 10px;
+
+            bottom: 10px;
+
+            z-index: 3;
+
+            border-radius: 15px;
+
+            border:
+                2px solid
+                rgba(255,255,255,.5);
+
+            box-shadow:
+                0 8px 30px
+                rgba(0,0,0,.5);
+
+        }
+
+
+        .photo:nth-child(4) img {
+
+            object-position:
+                center center;
+
+            transform:
+                scale(1.02);
+
+        }
+
+
+        /* ==========================================
+           EFECTO AL PASAR EL MOUSE
+        ========================================== */
+
+        .photo:hover img {
+
+            transform:
+                scale(1.08);
+
+        }
+
+
+        /* ==========================================
+           PEQUEÑA CAPA OSCURA
+        ========================================== */
+
+        .photos::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            /*
+                MUY TRANSPARENTE.
+                Las fotos se tienen que ver.
+            */
+
+            background:
+                rgba(0,0,0,.08);
+
+        }
+
+
+        /* ==========================================
+           TARJETA DEL MENSAJE
+        ========================================== */
+
+        .card {
+
+            position: relative;
+
+            z-index: 10;
+
+            width:
+                min(680px, 90vw);
+
+            max-height:
+                86svh;
+
+            overflow-y:
+                auto;
+
+            padding:
+                clamp(24px, 5vw, 42px);
+
+            border-radius:
+                25px;
+
+            /*
+                MUY TRANSPARENTE
+            */
+
+            background:
+                rgba(8,7,9,.34);
+
+            border:
+                1px solid
+                rgba(255,255,255,.24);
+
+            box-shadow:
+
+                0 20px 70px
+                rgba(0,0,0,.35),
+
+                inset 0 1px 0
+                rgba(255,255,255,.10);
+
+            backdrop-filter:
+                blur(3px);
+
+            -webkit-backdrop-filter:
+                blur(3px);
+
+            text-align:
+                center;
+
+            animation:
+                aparecer 1.4s ease;
+
+        }
+
+
+        /* ==========================================
+           ANIMACIÓN DE LA TARJETA
+        ========================================== */
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px)
+                    scale(.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* ==========================================
+           CORAZÓN PRINCIPAL
+        ========================================== */
+
+        .heart {
+
+            font-size:
+                clamp(32px, 7vw, 45px);
+
+            margin-bottom:
+                5px;
+
+            animation:
+                latido 1.7s infinite;
+
+            filter:
+                drop-shadow(
+                    0 0 12px
+                    rgba(255,70,120,.8)
+                );
+
+        }
+
+
+        @keyframes latido {
+
+            0%,
+            100% {
+
+                transform:
+                    scale(1);
+
+            }
+
+            15% {
+
+                transform:
+                    scale(1.17);
+
+            }
+
+            30% {
+
+                transform:
+                    scale(1);
+
+            }
+
+            45% {
+
+                transform:
+                    scale(1.09);
+
+            }
+
+        }
+
+
+        /* ==========================================
+           TÍTULO
+        ========================================== */
+
+        h1 {
+
+            margin:
+                0 0 18px;
+
+            font-size:
+                clamp(28px, 6vw, 44px);
+
+            font-weight:
+                600;
+
+            text-shadow:
+                0 2px 10px
+                rgba(0,0,0,.9);
+
+        }
+
+
+        /* ==========================================
+           TEXTO
+        ========================================== */
+
+        .message {
+
+            margin: 0;
+
+            font-size:
+                clamp(17px, 3.5vw, 21px);
+
+            line-height:
+                1.6;
+
+            color:
+                rgba(255,255,255,.98);
+
+            text-shadow:
+
+                0 2px 5px
+                rgba(0,0,0,1),
+
+                0 0 12px
+                rgba(0,0,0,.8);
+
+        }
+
+
+        /* ==========================================
+           TEXTO FINAL
+        ========================================== */
+
+        .small {
+
+            margin-top:
+                20px;
+
+            font-size:
+                15px;
+
+            opacity:
+                .85;
+
+            font-style:
+                italic;
+
+            text-shadow:
+                0 2px 6px
+                rgba(0,0,0,.9);
+
+        }
+
+
+        /* ==========================================
+           CORAZONES FLOTANTES
+        ========================================== */
+
+        .floating {
+
+            position:
+                fixed;
+
+            bottom:
+                -30px;
+
+            z-index:
+                50;
+
+            pointer-events:
+                none;
+
+            color:
+                rgba(255,100,145,.9);
+
+            animation:
+                subir linear forwards;
+
+            text-shadow:
+                0 0 10px
+                rgba(255,60,120,.9);
+
+        }
+
+
+        @keyframes subir {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    translateX(0)
+                    rotate(0deg);
+
+                opacity:
+                    0;
+
+            }
+
+
+            10% {
+
+                opacity:
+                    .8;
+
+            }
+
+
+            80% {
+
+                opacity:
+                    .35;
+
+            }
+
+
+            100% {
+
+                transform:
+                    translateY(-110vh)
+                    translateX(var(--movimiento))
+                    rotate(30deg);
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           CELULAR
+        ========================================== */
+
+        @media (max-width: 650px) {
+
+
+            .page {
+
+                padding:
+                    8px;
+
+            }
+
+
+            /*
+                En celular:
+
+                ┌───────┬────────────┐
+                │ PERRO │            │
+                │       │  GATITO 1  │
+                ├───────┤            │
+                │       │            │
+                │GATITO2│            │
+                └───────┴────────────┘
+
+                El gatito 1 ocupa
+                más de la mitad.
+            */
+
+            .photos {
+
+                grid-template-columns:
+                    .75fr
+                    1.60fr;
+
+                grid-template-rows:
+                    1fr
+                    1fr;
+
+                gap:
+                    3px;
+
+            }
+
+
+            /* ======================================
+               PERRITO
+            ====================================== */
+
+            .photo:nth-child(1) {
+
+                grid-column:
+                    1;
+
+                grid-row:
+                    1;
+
+            }
+
+
+            .photo:nth-child(1) img {
+
+                transform:
+                    scale(1.04);
+
+                object-position:
+                    center center;
+
+            }
+
+
+            /* ======================================
+               GATITO 1
+            ====================================== */
+
+            .photo:nth-child(2) {
+
+                grid-column:
+                    2;
+
+                grid-row:
+                    1 / span 2;
+
+            }
+
+
+            .photo:nth-child(2) img {
+
+                transform:
+                    scale(1.16);
+
+                object-position:
+                    center center;
+
+            }
+
+
+            /* ======================================
+               GATITO 2
+            ====================================== */
+
+            .photo:nth-child(3) {
+
+                grid-column:
+                    1;
+
+                grid-row:
+                    2;
+
+            }
+
+
+            .photo:nth-child(3) img {
+
+                transform:
+                    scale(1.18);
+
+                object-position:
+                    center center;
+
+            }
+
+
+            /* ======================================
+               GUITARRISTA
+            ====================================== */
+
+            .photo:nth-child(4) {
+
+                width:
+                    85px;
+
+                height:
+                    85px;
+
+                right:
+                    7px;
+
+                bottom:
+                    7px;
+
+                border-radius:
+                    12px;
+
+            }
+
+
+            /* ======================================
+               TARJETA
+            ====================================== */
+
+            .card {
+
+                width:
+                    91vw;
+
+                max-height:
+                    84svh;
+
+                padding:
+                    22px 17px;
+
+                /*
+                    Súper transparente
+                */
+
+                background:
+                    rgba(5,5,7,.31);
+
+                backdrop-filter:
+                    blur(2px);
+
+                -webkit-backdrop-filter:
+                    blur(2px);
+
+                border:
+                    1px solid
+                    rgba(255,255,255,.20);
+
+            }
+
+
+            /* ======================================
+               TEXTO
+            ====================================== */
+
+            .message {
+
+                font-size:
+                    16px;
+
+                line-height:
+                    1.52;
+
+            }
+
+
+            h1 {
+
+                font-size:
+                    30px;
+
+                margin-bottom:
+                    14px;
+
+            }
+
+
+            .heart {
+
+                font-size:
+                    34px;
+
+            }
+
+
+            .small {
+
+                font-size:
+                    14px;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           CELULARES MUY PEQUEÑOS
+        ========================================== */
+
+        @media (max-width: 380px) {
+
+
+            .card {
+
+                width:
+                    92vw;
+
+                padding:
+                    19px 14px;
+
+            }
+
+
+            .message {
+
+                font-size:
+                    15px;
+
+                line-height:
+                    1.48;
+
+            }
+
+
+            h1 {
+
+                font-size:
+                    27px;
+
+            }
+
+
+            .heart {
+
+                font-size:
+                    30px;
+
+            }
+
+
+            .photo:nth-child(4) {
+
+                width:
+                    70px;
+
+                height:
+                    70px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- ====================================
+             FOTOS
+        ===================================== -->
+
+        <div class="photos">
+
+
+            <!-- PERRITO -->
+
+            <div class="photo">
+
+                <img
+                    src="assets/perrito.jpg"
+                    alt="Perrito"
+                >
+
+            </div>
+
+
+            <!-- GATITO 1 -->
+
+            <div class="photo">
+
+                <img
+                    src="assets/gatito1.jpg"
+                    alt="Gatito"
+                >
+
+            </div>
+
+
+            <!-- GATITO 2 -->
+
+            <div class="photo">
+
+                <img
+                    src="assets/gatito2.jpg"
+                    alt="Gatito"
+                >
+
+            </div>
+
+
+            <!-- GUITARRISTA -->
+
+            <div class="photo">
+
+                <img
+                    src="assets/guitarrista.webp"
+                    alt="Guitarrista"
+                >
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================
+             MENSAJE
+        ===================================== -->
+
+        <section class="card">
+
+
+            <div class="heart">
+
+                ❤️
+
+            </div>
+
+
+            <h1>
+
+                cachorra
+
+            </h1>
+
+
+            <p class="message">
+
+                Perdon si alguna vez me porte mal
+                con vos o hice algo que te molesto.
+
+                La verdad es que te extraño cada dia
+                un poquito mas
+
+                Si algun dia queres volver a hablar
+                conmigo, o si alguna vez me necesitas sabes
+                 voy a estar.
+
+                <br><br>
+
+                a veces soy medio boludo y que soy medio
+                 jodido es que no me doy cuenta
+                 
+
+                No quiero molestarte ni nada.
+
+                Solamente queria decirte eso y que te sigo queriendo
+                ❤️
+
+            </p>
+
+
+            
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+
+        /*
+            CREA LOS CORAZONES
+        */
+
+        function crearCorazon() {
+
+
+            const corazon =
+                document.createElement("div");
+
+
+            corazon.className =
+                "floating";
+
+
+            /*
+                Corazón lleno o vacío
+            */
+
+            corazon.textContent =
+                Math.random() > 0.3
+                    ? "♥"
+                    : "♡";
+
+
+            /*
+                Posición horizontal
+            */
+
+            corazon.style.left =
+                Math.random() * 100 +
+                "vw";
+
+
+            /*
+                Tamaño
+            */
+
+            corazon.style.fontSize =
+                (
+                    12 +
+                    Math.random() * 18
+                ) +
+                "px";
+
+
+            /*
+                Movimiento lateral
+            */
+
+            corazon.style.setProperty(
+                "--movimiento",
+                (
+                    Math.random() * 180 -
+                    90
+                ) +
+                "px"
+            );
+
+
+            /*
+                Velocidad
+            */
+
+            corazon.style.animationDuration =
+                (
+                    6 +
+                    Math.random() * 5
+                ) +
+                "s";
+
+
+            document.body.appendChild(
+                corazon
+            );
+
+
+            /*
+                Lo eliminamos
+            */
+
+            setTimeout(
+                () => {
+
+                    corazon.remove();
+
+                },
+                12000
+            );
+
+        }
+
+
+        /*
+            Crear corazones
+            cada 650 milisegundos
+        */
+
+        setInterval(
+            crearCorazon,
+            650
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
+

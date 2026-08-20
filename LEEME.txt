@@ -1,0 +1,8 @@
+PAGINA DE PERDON ❤️
+
+1. Descomprimí el ZIP.
+2. Abrí index.html en el navegador.
+3. La página está pensada para celular y también funciona en PC.
+
+Las cuatro fotos están dentro de la carpeta assets.
+No necesita internet ni servidor: todo funciona localmente.
